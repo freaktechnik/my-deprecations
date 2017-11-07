@@ -1,8 +1,6 @@
 # my-deprecations
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/freaktechnik/my-deprecations.svg)](https://greenkeeper.io/)
-
-[![Build Status](https://travis-ci.org/freaktechnik/my-deprecations.svg?branch=master)](https://travis-ci.org/freaktechnik/my-deprecations)
+[![Greenkeeper badge](https://badges.greenkeeper.io/freaktechnik/my-deprecations.svg)](https://greenkeeper.io/) [![Build Status](https://travis-ci.org/freaktechnik/my-deprecations.svg?branch=master)](https://travis-ci.org/freaktechnik/my-deprecations)
 
 Command line utility to list deprecated package versions of a user with deprecation
 message.
