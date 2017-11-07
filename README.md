@@ -15,6 +15,7 @@ $ my-deprecations <username>
 ```
 
 Replace `<username>` with the npm user you want to get the deprecated packages for.
+If no username is given it tries to use the logged in npm user.
 
 Specify the `--verbose` parameter to list all versions, even if every version of
 a package is deprecated.

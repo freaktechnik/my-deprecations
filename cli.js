@@ -1,17 +1,19 @@
 #!/usr/bin/env node
 "use strict";
 
-/* eslint-disable promise/catch-or-return */
 const meow = require("meow"),
     myDeprecations = require("./index"),
     ora = require("ora"),
     buildTree = require("pretty-tree"),
     formatTree = require("./treeify"),
     chalk = require("chalk"),
+    npmWhoami = require("npm-whoami"),
     ARG_COUNT = 1,
     cli = meow(`
     Usage
-        $ my-deprecations <username>
+        $ my-deprecations [username]
+
+        <username> defaults to the logged in npm user.
 
     Options
         -v, --verbose  Show all deprecated versions
@@ -55,20 +57,39 @@ const meow = require("meow"),
             }
         });
 
-if(cli.input.length != ARG_COUNT) {
+if(cli.input.length > ARG_COUNT) {
     const ERROR = 1;
-    process.stdout.write(chalk.red("Should specify exactly one username.\n"));
+    process.stdout.write(chalk.red("Should specify at most one username.\n"));
     cli.showHelp(ERROR);
 }
 
-const [ username ] = cli.input,
-    deprecations = myDeprecations(username.trim(), cli.flags.verbose);
-ora.promise(deprecations, `Getting deprecations for ${username}`);
+let username;
+if(!cli.input.length) {
+    username = new Promise((resolve, reject) => {
+        npmWhoami((err, user) => {
+            if(err) {
+                reject(err);
+            }
+            else {
+                resolve(user);
+            }
+        });
+    });
+    ora.promise(username, 'Getting username');
+}
+else {
+    const [ u ] = cli.input;
+    username = Promise.resolve(u);
+}
 
-deprecations.then((info) => {
-    const spinner = ora('Building nice tree').start(),
-        tree = buildTree(formatTree(info, username));
+(async () => {
+    const user = await username,
+        deprecations = myDeprecations(user.trim(), cli.flags.verbose);
+    ora.promise(deprecations, `Getting deprecations for ${user}`);
+
+    const info = await deprecations,
+        spinner = ora('Building nice tree').start(),
+        tree = buildTree(formatTree(info, user));
     spinner.succeed();
     process.stdout.write(tree);
-});
-/* eslint-enable promise/catch-or-return */
+})();
