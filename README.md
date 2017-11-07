@@ -16,11 +16,14 @@ $ my-deprecations <username>
 
 Replace `<username>` with the npm user you want to get the deprecated packages for.
 
+Specify the `--verbose` parameter to list all versions, even if every version of
+a package is deprecated.
+
 ### Module
 ```js
 const myDeprecations = require("my-deprecations");
 
-myDeprecations('username').then((deprecations) => {
+myDeprecations('username').then((deprecations, false) => {
     // ...
 });
 ```
@@ -31,9 +34,15 @@ deprecations. The structure is as follows:
 {
     "packageName": {
         "version": "reason"
+    },
+    "fullyDeprecatedPackage": {
+        "_allDeprecated": true
     }
 }
 ```
+
+If the second parameter is not set to true versions of packages with all versions
+deprecated are omitted.
 
 ### License
 This package is licensed under the MIT.
