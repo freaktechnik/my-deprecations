@@ -1,5 +1,7 @@
 # my-deprecations
 
+[![Build Status](https://travis-ci.org/freaktechnik/my-deprecations.svg?branch=master)](https://travis-ci.org/freaktechnik/my-deprecations)
+
 Command line utility to list deprecated package versions of a user with deprecation
 message.
 
