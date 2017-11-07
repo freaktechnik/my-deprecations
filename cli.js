@@ -50,14 +50,15 @@ const meow = require("meow"),
           ├── 3.1.0: Checks an outdated webapp spec
           └── 3.1.1: Checks an outdated webapp spec
 `, {
-    alias: {
-        v: 'verbose'
-    }
-});
+            alias: {
+                v: 'verbose'
+            }
+        });
 
 if(cli.input.length != ARG_COUNT) {
+    const ERROR = 1;
     process.stdout.write(chalk.red("Should specify exactly one username.\n"));
-    cli.showHelp(1);
+    cli.showHelp(ERROR);
 }
 
 const [ username ] = cli.input,

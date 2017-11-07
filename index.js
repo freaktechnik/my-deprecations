@@ -15,8 +15,8 @@ module.exports = (username, showAllDeprecatedVersions = false) => userPackages(u
     .then((allPackages) => {
         // Filter packages & versions that aren't deprecated.
         for(const pkg in allPackages) {
-            let hasDeprecated = false;
-            let hasUndeprecated = false;
+            let hasDeprecated = false,
+                hasUndeprecated = false;
             for(const version in allPackages[pkg]) {
                 if(allPackages[pkg][version] !== undefined) {
                     hasDeprecated = true;
