@@ -26,7 +26,7 @@
   "homepage": "https://github.com/freaktechnik/my-deprecations#readme",
   "dependencies": {
     "chalk": "^2.3.0",
-    "deprecations": "^2.0.1",
+    "deprecations": "^2.0.2",
     "meow": "^3.7.0",
     "npm-user-packages": "^3.0.0",
     "npm-whoami": "^1.1.4",
