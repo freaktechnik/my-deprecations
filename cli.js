@@ -9,7 +9,8 @@ const meow = require("meow"),
     chalk = require("chalk"),
     npmWhoami = require("npm-whoami"),
     ARG_COUNT = 1,
-    cli = meow(`
+    cli = meow({
+        help: `
     Usage
         $ my-deprecations [username]
 
@@ -17,6 +18,8 @@ const meow = require("meow"),
 
     Options
         -v, --verbose  Show all deprecated versions
+        --help         This help output
+        --version      Version of the tool
 
     Examples
         $ my-deprecations freaktechnik
@@ -51,14 +54,14 @@ const meow = require("meow"),
         └─┬ webapp-validator-central
           ├── 3.1.0: Checks an outdated webapp spec
           └── 3.1.1: Checks an outdated webapp spec
-`, {
-            flags: {
-                verbose: {
-                    type: "boolean",
-                    alias: "v"
-                }
+`,
+        flags: {
+            verbose: {
+                type: "boolean",
+                alias: "v"
             }
-        });
+        }
+    });
 
 if(cli.input.length > ARG_COUNT) {
     const ERROR = 1;
