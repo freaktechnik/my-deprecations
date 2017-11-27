@@ -52,8 +52,11 @@ const meow = require("meow"),
           ├── 3.1.0: Checks an outdated webapp spec
           └── 3.1.1: Checks an outdated webapp spec
 `, {
-            alias: {
-                v: 'verbose'
+            flags: {
+                verbose: {
+                    type: "boolean",
+                    alias: "v"
+                }
             }
         });
 
