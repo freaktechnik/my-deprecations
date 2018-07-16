@@ -2,7 +2,7 @@
 "use strict";
 
 const meow = require("meow"),
-    myDeprecations = require("./index"),
+    myDeprecations = require('.'),
     ora = require("ora"),
     buildTree = require("pretty-tree"),
     formatTree = require("./treeify"),
