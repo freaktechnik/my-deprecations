@@ -30,7 +30,7 @@
     "meow": "^5.0.0",
     "npm-user-packages": "^3.0.0",
     "npm-whoami": "^1.1.4",
-    "ora": "^2.0.0",
+    "ora": "^3.0.0",
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
