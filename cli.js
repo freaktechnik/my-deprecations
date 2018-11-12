@@ -3,11 +3,11 @@
 
 const meow = require("meow"),
     myDeprecations = require('.'),
-    ora = require("ora"),
+    Listr = require("listr"),
+    execa = require("execa"),
     buildTree = require("pretty-tree"),
     formatTree = require("./treeify"),
     chalk = require("chalk"),
-    npmWhoami = require("npm-whoami"),
     ARG_COUNT = 1,
     cli = meow({
         help: `
@@ -61,41 +61,40 @@ const meow = require("meow"),
                 alias: "v"
             }
         }
-    });
+    }),
+    tasks = new Listr([
+        {
+            title: "Get username",
+            enabled: (ctx) => !ctx.username,
+            task: async (ctx) => {
+                ctx.username = await execa.stdout('npm', [ 'whoami' ]);
+            }
+        },
+        {
+            title: "Get deprecations",
+            task: async (ctx, task) => myDeprecations(ctx.username.trim(), ctx.verbose, task)
+        },
+        {
+            title: "Build nice tree",
+            task: (ctx) => {
+                ctx.tree = buildTree(formatTree(ctx.info, ctx.username));
+            }
+        }
+    ]);
 
 if(cli.input.length > ARG_COUNT) {
     const ERROR = 1;
     process.stdout.write(chalk.red("Should specify at most one username.\n"));
     cli.showHelp(ERROR);
+    return;
 }
 
-let username;
-if(!cli.input.length) {
-    username = new Promise((resolve, reject) => {
-        npmWhoami((err, user) => {
-            if(err) {
-                reject(err);
-            }
-            else {
-                resolve(user);
-            }
-        });
-    });
-    ora.promise(username, 'Getting username');
-}
-else {
-    const [ u ] = cli.input;
-    username = Promise.resolve(u);
-}
-
-(async () => {
-    const user = await username,
-        deprecations = myDeprecations(user.trim(), cli.flags.verbose);
-    ora.promise(deprecations, `Getting deprecations for ${user}`);
-
-    const info = await deprecations,
-        spinner = ora('Building nice tree').start(),
-        tree = buildTree(formatTree(info, user));
-    spinner.succeed();
-    process.stdout.write(tree);
-})();
+tasks.run({
+    username: cli.input[0],
+    verbose: cli.flags.verbose,
+    info: {}
+})
+    .then((ctx) => {
+        process.stdout.write(ctx.tree);
+    })
+    .catch(console.error);

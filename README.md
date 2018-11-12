@@ -22,30 +22,5 @@ If no username is given it tries to use the logged in npm user.
 Specify the `--verbose` parameter to list all versions, even if every version of
 a package is deprecated.
 
-### Module
-```js
-const myDeprecations = require("my-deprecations");
-
-myDeprecations('username').then((deprecations, false) => {
-    // ...
-});
-```
-
-The main module exports a single function that resolves to an object with the
-deprecations. The structure is as follows:
-```json
-{
-    "packageName": {
-        "version": "reason"
-    },
-    "fullyDeprecatedPackage": {
-        "_allDeprecated": true
-    }
-}
-```
-
-If the second parameter is not set to true versions of packages with all versions
-deprecated are omitted.
-
 ### License
 This package is licensed under the MIT.
