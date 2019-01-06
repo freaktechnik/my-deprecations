@@ -9,6 +9,7 @@ const meow = require("meow"),
     formatTree = require("./treeify"),
     chalk = require("chalk"),
     ARG_COUNT = 1,
+    FIRST = 0,
     cli = meow({
         help: `
     Usage
@@ -90,7 +91,7 @@ if(cli.input.length > ARG_COUNT) {
 }
 
 tasks.run({
-    username: cli.input[0],
+    username: cli.input[FIRST],
     verbose: cli.flags.verbose,
     info: {}
 })
