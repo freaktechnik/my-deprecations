@@ -6,7 +6,7 @@ const userPackages = require("npm-user-packages"),
 
     getVersions = (moduleName) => pacote.packument(moduleName, {
         includeDeprecated: true
-    }).then((res) => Object.values(res.versions))
+    }).then((res) => Object.values(res.versions));
 
 module.exports = async () => new Listr([
     {
