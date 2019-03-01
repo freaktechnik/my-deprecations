@@ -1,32 +1,12 @@
 "use strict";
 
-const execa = require("execa"),
-    userPackages = require("npm-user-packages"),
+const userPackages = require("npm-user-packages"),
     Listr = require("listr"),
+    pacote = require("pacote"),
 
-    getVersions = (moduleName) => execa.stdout('npm', [
-        'info',
-        moduleName,
-        'versions',
-        '--json',
-        '--silent',
-        '--no-spin'
-    ])
-        .then((res) => JSON.parse(res)),
-    getDeprecationMessage = (moduleName, version) => execa.stdout('npm', [
-        'info',
-        `${moduleName}@${version}`,
-        'deprecated',
-        '--json',
-        '--silent',
-        '--no-spin'
-    ])
-        .then((res) => {
-            if(!res) {
-                return undefined;
-            }
-            return JSON.parse(res);
-        });
+    getVersions = (moduleName) => pacote.packument(moduleName, {
+        includeDeprecated: true
+    }).then((res) => Object.values(res.versions))
 
 module.exports = async () => new Listr([
     {
@@ -52,23 +32,16 @@ module.exports = async () => new Listr([
                 },
                 {
                     title: `Get deprecation messages for ${pkg.name}`,
-                    task: (depCtx) => new Listr(depCtx.info[pkg.name].versions.map((version) => ({
-                        title: `Get deprecation message for ${pkg.name}@${version}`,
-                        task: async (innerCtx) => {
-                            const deprecationMessage = await getDeprecationMessage(pkg.name, version);
-                            if(deprecationMessage && deprecationMessage.length) {
-                                if(!innerCtx.info[pkg.name].deprecations) {
-                                    innerCtx.info[pkg.name].deprecations = {};
-                                }
-                                innerCtx.info[pkg.name].deprecations[version] = deprecationMessage;
+                    task: (depCtx) => depCtx.info[pkg.name].versions.forEach((version) => {
+                        if(version.deprecated) {
+                            if(!depCtx.info[pkg.name].deprecations) {
+                                depCtx.info[pkg.name].deprecations = {};
                             }
-                            else {
-                                innerCtx.info[pkg.name].hasUndeprecated = true;
-                            }
+                            depCtx.info[pkg.name].deprecations[version.version] = version.deprecated;
                         }
-                    })), {
-                        collapse: true,
-                        clearOutput: true
+                        else {
+                            depCtx.info[pkg.name].hasUndeprecated = true;
+                        }
                     })
                 },
                 {
