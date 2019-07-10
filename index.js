@@ -13,7 +13,8 @@ module.exports = async () => new Listr([
         title: "Get packages for user",
         task: async (ctx, task) => {
             task.title = `Get packages for user ${ctx.username}`;
-            ctx.packages = await userPackages(ctx.username);
+            const packages = await userPackages(ctx.username);
+            ctx.packages = packages;
         }
     },
     {
