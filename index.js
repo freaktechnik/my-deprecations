@@ -14,7 +14,7 @@ module.exports = async () => new Listr([
         task: async (ctx, task) => {
             task.title = `Get packages for user ${ctx.username}`;
             const packages = await userPackages(ctx.username);
-            ctx.packages = packages;
+            ctx.packages = packages; // eslint-disable-line require-atomic-updates
         }
     },
     {
