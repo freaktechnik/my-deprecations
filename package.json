@@ -30,7 +30,7 @@
     "listr": "^0.14.3",
     "meow": "^5.0.0",
     "npm-user-packages": "^3.0.0",
-    "ora": "^3.1.0",
+    "ora": "^4.0.0",
     "pacote": "^9.5.0",
     "pretty-tree": "^1.0.0"
   },
