@@ -35,7 +35,7 @@
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
-    "@freaktechnik/eslint-config-node": "^6.6.2",
+    "@freaktechnik/eslint-config-node": "^7.0.0",
     "eslint": "^6.0.1"
   },
   "bin": {
