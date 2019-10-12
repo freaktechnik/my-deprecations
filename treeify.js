@@ -3,9 +3,9 @@
 /**
  * Formats deprecated package info as a pretty-tree structure.
  *
- * @param {Object} deprecatedPakages - Deprecated package info.
+ * @param {object} deprecatedPakages - Deprecated package info.
  * @param {string} username - Name of the user the deprecated packages are of.
- * @returns {Object} Tree strucutre for pretty-tree.
+ * @returns {object} Tree strucutre for pretty-tree.
  */
 module.exports = (deprecatedPakages, username) => {
     const tree = {

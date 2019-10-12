@@ -68,7 +68,8 @@ const meow = require("meow"),
             title: "Get username",
             enabled: (ctx) => !ctx.username,
             task: async (ctx) => {
-                ctx.username = await execa.stdout('npm', [ 'whoami' ]);
+                const { stdout } = await execa('npm', [ 'whoami' ]);
+                ctx.username = stdout;
             }
         },
         {
