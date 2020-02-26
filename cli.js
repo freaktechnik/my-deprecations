@@ -66,20 +66,20 @@ const meow = require("meow"),
     tasks = new Listr([
         {
             title: "Get username",
-            enabled: (ctx) => !ctx.username,
-            task: async (ctx) => {
+            enabled: (context) => !context.username,
+            task: async (context) => {
                 const { stdout } = await execa('npm', [ 'whoami' ]);
-                ctx.username = stdout;
+                context.username = stdout;
             }
         },
         {
             title: "Get deprecations",
-            task: async (ctx, task) => myDeprecations(ctx.username.trim(), ctx.verbose, task)
+            task: async (context, task) => myDeprecations(context.username.trim(), context.verbose, task)
         },
         {
             title: "Build nice tree",
-            task: (ctx) => {
-                ctx.tree = buildTree(formatTree(ctx.info, ctx.username));
+            task: (context) => {
+                context.tree = buildTree(formatTree(context.info, context.username));
             }
         }
     ]);
@@ -96,7 +96,7 @@ tasks.run({
     verbose: cli.flags.verbose,
     info: {}
 })
-    .then((ctx) => {
-        process.stdout.write(ctx.tree);
+    .then((context) => {
+        process.stdout.write(context.tree);
     })
     .catch(console.error);

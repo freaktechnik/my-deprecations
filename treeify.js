@@ -14,18 +14,18 @@ module.exports = (deprecatedPakages, username) => {
         leaf: {}
     };
     let addedLeaf = false;
-    for(const pkg in deprecatedPakages) {
+    for(const package_ in deprecatedPakages) {
         const node = {
-            label: pkg,
+            label: package_,
             leaf: {}
         };
-        if(deprecatedPakages[pkg]._allDeprecated) {
-            tree.leaf[pkg] = '(all versions)';
+        if(deprecatedPakages[package_]._allDeprecated) {
+            tree.leaf[package_] = '(all versions)';
             addedLeaf = true;
         }
         else {
-            for(const version in deprecatedPakages[pkg]) {
-                node.leaf[version] = deprecatedPakages[pkg][version];
+            for(const version in deprecatedPakages[package_]) {
+                node.leaf[version] = deprecatedPakages[package_][version];
             }
             tree.nodes.push(node);
         }
