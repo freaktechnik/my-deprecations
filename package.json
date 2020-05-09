@@ -6,7 +6,9 @@
   "scripts": {
     "lint": "eslint . --ext js,json",
     "test": "npm run lint",
-    "start": "node cli.js"
+    "start": "node cli.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -32,7 +34,8 @@
     "npm-user-packages": "^3.0.0",
     "ora": "^4.0.4",
     "pacote": "^11.1.4",
-    "pretty-tree": "^1.0.0"
+    "pretty-tree": "^1.0.0",
+    "snyk": "^1.316.2"
   },
   "devDependencies": {
     "@freaktechnik/eslint-config-node": "^7.1.0",
@@ -48,5 +51,6 @@
     "index.js",
     "cli.js",
     "treeify.js"
-  ]
+  ],
+  "snyk": true
 }
