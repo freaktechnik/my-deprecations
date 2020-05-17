@@ -33,7 +33,7 @@
     "meow": "^6.1.1",
     "npm-user-packages": "^3.0.0",
     "ora": "^4.0.4",
-    "pacote": "^11.1.9",
+    "pacote": "^11.1.10",
     "pretty-tree": "^1.0.0",
     "snyk": "^1.319.2"
   },
