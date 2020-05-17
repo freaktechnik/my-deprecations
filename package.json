@@ -35,7 +35,7 @@
     "ora": "^4.0.4",
     "pacote": "^11.1.9",
     "pretty-tree": "^1.0.0",
-    "snyk": "^1.319.2"
+    "snyk": "^1.321.0"
   },
   "devDependencies": {
     "@freaktechnik/eslint-config-node": "^7.1.0",
