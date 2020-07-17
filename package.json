@@ -25,18 +25,18 @@
   },
   "homepage": "https://github.com/freaktechnik/my-deprecations#readme",
   "dependencies": {
-    "chalk": "^3.0.0",
-    "execa": "^4.0.0",
+    "chalk": "^4.1.0",
+    "execa": "^4.0.3",
     "listr": "^0.14.3",
-    "meow": "^6.1.1",
+    "meow": "^7.0.1",
     "npm-user-packages": "^3.0.0",
-    "ora": "^4.0.4",
-    "pacote": "^11.1.9",
+    "ora": "^4.0.5",
+    "pacote": "^11.1.10",
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
-    "@freaktechnik/eslint-config-node": "^7.1.0",
-    "eslint": "^6.8.0"
+    "@freaktechnik/eslint-config-node": "^7.2.0",
+    "eslint": "^7.4.0"
   },
   "bin": {
     "my-depreactions": "./cli.js"
