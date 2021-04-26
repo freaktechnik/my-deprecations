@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@freaktechnik/eslint-config-node": "^8.0.2",
-    "eslint": "^7.24.0"
+    "eslint": "^7.25.0"
   },
   "bin": {
     "my-depreactions": "./cli.js"
