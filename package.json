@@ -31,7 +31,7 @@
     "meow": "^9.0.0",
     "npm-user-packages": "^3.0.0",
     "ora": "^5.4.1",
-    "pacote": "^11.3.4",
+    "pacote": "^11.3.5",
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
