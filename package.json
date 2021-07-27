@@ -2,7 +2,9 @@
   "name": "my-deprecations",
   "version": "2.1.5",
   "description": "List your deprecations",
+  "type": "module",
   "main": "index.js",
+  "exports": "./index.js",
   "scripts": {
     "lint": "eslint . --ext js,json",
     "test": "npm run lint",
@@ -28,7 +30,7 @@
     "chalk": "^4.1.1",
     "execa": "^5.1.1",
     "listr": "^0.14.3",
-    "meow": "^9.0.0",
+    "meow": "^10.1.0",
     "npm-user-packages": "^3.0.0",
     "ora": "^5.4.1",
     "pacote": "^11.3.5",
@@ -42,7 +44,7 @@
     "my-depreactions": "./cli.js"
   },
   "engines": {
-    "node": ">= 10.15.3"
+    "node": ">= 14.8.0"
   },
   "files": [
     "index.js",

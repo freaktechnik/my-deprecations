@@ -1,17 +1,15 @@
 #!/usr/bin/env node
-"use strict";
 
-const meow = require("meow"),
-    myDeprecations = require('.'),
-    Listr = require("listr"),
-    execa = require("execa"),
-    buildTree = require("pretty-tree"),
-    formatTree = require("./treeify"),
-    chalk = require("chalk"),
-    ARG_COUNT = 1,
+import meow from "meow";
+import myDeprecations from './index.js';
+import Listr from "listr";
+import execa from "execa";
+import buildTree from "pretty-tree";
+import formatTree from "./treeify.js";
+import chalk from "chalk";
+const ARG_COUNT = 1,
     FIRST = 0,
-    cli = meow({
-        help: `
+    cli = meow(`
     Usage
         $ my-deprecations [username]
 
@@ -56,6 +54,8 @@ const meow = require("meow"),
           ├── 3.1.0: Checks an outdated webapp spec
           └── 3.1.1: Checks an outdated webapp spec
 `,
+    {
+        importMeta: import.meta,
         flags: {
             verbose: {
                 type: "boolean",
@@ -88,15 +88,12 @@ if(cli.input.length > ARG_COUNT) {
     const ERROR = 1;
     process.stdout.write(chalk.red("Should specify at most one username.\n"));
     cli.showHelp(ERROR);
-    return;
 }
-
-tasks.run({
-    username: cli.input[FIRST],
-    verbose: cli.flags.verbose,
-    info: {}
-})
-    .then((context) => {
-        process.stdout.write(context.tree);
-    })
-    .catch(console.error);
+else {
+    const context = await tasks.run({
+        username: cli.input[FIRST],
+        verbose: cli.flags.verbose,
+        info: {}
+    });
+    process.stdout.write(context.tree);
+}

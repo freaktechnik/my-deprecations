@@ -1,5 +1,3 @@
-"use strict";
-
 /**
  * Formats deprecated package info as a pretty-tree structure.
  *
@@ -7,7 +5,7 @@
  * @param {string} username - Name of the user the deprecated packages are of.
  * @returns {object} Tree strucutre for pretty-tree.
  */
-module.exports = (deprecatedPakages, username) => {
+export default (deprecatedPakages, username) => {
     const tree = {
         label: `Deprecated packages of ${username}`,
         nodes: [],

@@ -1,14 +1,12 @@
-"use strict";
+import userPackages from "npm-user-packages";
+import Listr from "listr";
+import pacote from "pacote";
 
-const userPackages = require("npm-user-packages"),
-    Listr = require("listr"),
-    pacote = require("pacote"),
+const getVersions = (moduleName) => pacote.packument(moduleName, {
+    includeDeprecated: true
+}).then((result) => Object.values(result.versions));
 
-    getVersions = (moduleName) => pacote.packument(moduleName, {
-        includeDeprecated: true
-    }).then((result) => Object.values(result.versions));
-
-module.exports = async () => new Listr([
+export default async () => new Listr([
     {
         title: "Get packages for user",
         task: async (context, task) => {
@@ -33,17 +31,19 @@ module.exports = async () => new Listr([
                 },
                 {
                     title: `Get deprecation messages for ${package_.name}`,
-                    task: (depContext) => depContext.info[package_.name].versions.forEach((version) => {
-                        if(version.deprecated) {
-                            if(!depContext.info[package_.name].deprecations) {
-                                depContext.info[package_.name].deprecations = {};
+                    task: (depContext) => {
+                        for(const version of depContext.info[package_.name].versions) {
+                            if(version.deprecated) {
+                                if(!depContext.info[package_.name].deprecations) {
+                                    depContext.info[package_.name].deprecations = {};
+                                }
+                                depContext.info[package_.name].deprecations[version.version] = version.deprecated;
                             }
-                            depContext.info[package_.name].deprecations[version.version] = version.deprecated;
+                            else {
+                                depContext.info[package_.name].hasUndeprecated = true;
+                            }
                         }
-                        else {
-                            depContext.info[package_.name].hasUndeprecated = true;
-                        }
-                    })
+                    }
                 },
                 {
                     title: `Collect deprecations for ${package_.name}`,
