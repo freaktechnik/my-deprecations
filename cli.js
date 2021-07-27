@@ -90,10 +90,13 @@ if(cli.input.length > ARG_COUNT) {
     cli.showHelp(ERROR);
 }
 else {
-    const context = await tasks.run({
+    tasks.run({
         username: cli.input[FIRST],
         verbose: cli.flags.verbose,
         info: {}
-    });
-    process.stdout.write(context.tree);
+    })
+        .then((context) => {
+            process.stdout.write(context.tree);
+        })
+        .catch(console.error);
 }
