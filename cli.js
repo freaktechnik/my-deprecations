@@ -3,7 +3,7 @@
 import meow from "meow";
 import myDeprecations from './index.js';
 import Listr from "listr";
-import execa from "execa";
+import { execa } from "execa";
 import buildTree from "pretty-tree";
 import formatTree from "./treeify.js";
 import chalk from "chalk";
