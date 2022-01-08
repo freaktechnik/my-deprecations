@@ -28,6 +28,7 @@
   "homepage": "https://github.com/freaktechnik/my-deprecations#readme",
   "dependencies": {
     "chalk": "^5.0.0",
+    "eslint-plugin-optimize-regex": "^1.2.1",
     "execa": "^6.0.0",
     "listr": "^0.14.3",
     "meow": "^10.1.2",
@@ -36,8 +37,8 @@
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
-    "@freaktechnik/eslint-config-node": "^8.0.2",
-    "eslint": "^7.32.0"
+    "@freaktechnik/eslint-config-node": "^9.0.3",
+    "eslint": "^8.6.0"
   },
   "bin": {
     "my-depreactions": "./cli.js"
