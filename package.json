@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/freaktechnik/my-deprecations#readme",
   "dependencies": {
-    "chalk": "^5.1.2",
+    "chalk": "^5.2.0",
     "eslint-plugin-optimize-regex": "^1.2.1",
     "execa": "^6.1.0",
     "listr": "^0.14.3",
