@@ -2,9 +2,12 @@ import userPackages from "npm-user-packages";
 import Listr from "listr";
 import pacote from "pacote";
 
-const getVersions = (moduleName) => pacote.packument(moduleName, {
-    includeDeprecated: true
-}).then((result) => Object.values(result.versions));
+const getVersions = async (moduleName) => {
+    const result = await pacote.packument(moduleName, {
+        includeDeprecated: true
+    });
+    return Object.values(result.versions);
+};
 
 export default async () => new Listr([
     {
@@ -53,11 +56,11 @@ export default async () => new Listr([
                                 _allDeprecated: true
                             };
                         }
-                        else if(!innerContext.info[package_.name].deprecations) {
-                            delete innerContext.info[package_.name];
+                        else if(innerContext.info[package_.name].deprecations) {
+                            innerContext.info[package_.name] = innerContext.info[package_.name].deprecations;
                         }
                         else {
-                            innerContext.info[package_.name] = innerContext.info[package_.name].deprecations;
+                            delete innerContext.info[package_.name];
                         }
                     }
                 }
