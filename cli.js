@@ -59,7 +59,7 @@ const ARG_COUNT = 1,
         flags: {
             verbose: {
                 type: "boolean",
-                alias: "v"
+                shortFlag: "v"
             }
         }
     }),
