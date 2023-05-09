@@ -37,8 +37,8 @@
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
-    "@freaktechnik/eslint-config-node": "^9.1.1",
-    "eslint": "^8.39.0"
+    "@freaktechnik/eslint-config-node": "^9.2.1",
+    "eslint": "^8.40.0"
   },
   "bin": {
     "my-depreactions": "./cli.js"
