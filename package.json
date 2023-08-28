@@ -33,7 +33,7 @@
     "listr": "^0.14.3",
     "meow": "^12.1.0",
     "npm-user-packages": "^3.0.0",
-    "pacote": "^17.0.2",
+    "pacote": "^17.0.3",
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
