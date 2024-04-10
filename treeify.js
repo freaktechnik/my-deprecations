@@ -9,13 +9,13 @@ export default (deprecatedPakages, username) => {
     const tree = {
         label: `Deprecated packages of ${username}`,
         nodes: [],
-        leaf: {}
+        leaf: {},
     };
     let addedLeaf = false;
     for(const package_ in deprecatedPakages) {
         const node = {
             label: package_,
-            leaf: {}
+            leaf: {},
         };
         if(deprecatedPakages[package_]._allDeprecated) {
             tree.leaf[package_] = '(all versions)';

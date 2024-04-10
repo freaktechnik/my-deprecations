@@ -59,9 +59,9 @@ const ARG_COUNT = 1,
         flags: {
             verbose: {
                 type: "boolean",
-                shortFlag: "v"
-            }
-        }
+                shortFlag: "v",
+            },
+        },
     }),
     tasks = new Listr([
         {
@@ -70,18 +70,18 @@ const ARG_COUNT = 1,
             task: async (context) => {
                 const { stdout } = await execa('npm', [ 'whoami' ]);
                 context.username = stdout;
-            }
+            },
         },
         {
             title: "Get deprecations",
-            task: async (context, task) => myDeprecations(context.username.trim(), context.verbose, task)
+            task: async (context, task) => myDeprecations(context.username.trim(), context.verbose, task),
         },
         {
             title: "Build nice tree",
             task: (context) => {
                 context.tree = buildTree(formatTree(context.info, context.username));
-            }
-        }
+            },
+        },
     ]);
 
 if(cli.input.length > ARG_COUNT) {
@@ -93,7 +93,7 @@ else {
     tasks.run({
         username: cli.input[FIRST],
         verbose: cli.flags.verbose,
-        info: {}
+        info: {},
     })
         .then((context) => {
             process.stdout.write(context.tree);

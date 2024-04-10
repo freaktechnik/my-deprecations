@@ -4,7 +4,7 @@ import pacote from "pacote";
 
 const getVersions = async (moduleName) => {
     const result = await pacote.packument(moduleName, {
-        includeDeprecated: true
+        includeDeprecated: true,
     });
     return Object.values(result.versions);
 };
@@ -16,7 +16,7 @@ export default async () => new Listr([
             task.title = `Get packages for user ${context.username}`;
             const packages = await userPackages(context.username);
             context.packages = packages; // eslint-disable-line require-atomic-updates
-        }
+        },
     },
     {
         title: 'Get versions of packages',
@@ -27,10 +27,10 @@ export default async () => new Listr([
                     title: `Get versions for ${package_.name}`,
                     task: async (packageContext) => {
                         packageContext.info[package_.name] = {
-                            hasUndeprecated: false
+                            hasUndeprecated: false,
                         };
                         packageContext.info[package_.name].versions = await getVersions(package_.name);
-                    }
+                    },
                 },
                 {
                     title: `Get deprecation messages for ${package_.name}`,
@@ -46,14 +46,14 @@ export default async () => new Listr([
                                 depContext.info[package_.name].hasUndeprecated = true;
                             }
                         }
-                    }
+                    },
                 },
                 {
                     title: `Collect deprecations for ${package_.name}`,
                     task: (innerContext) => {
                         if(!innerContext.info[package_.name].hasUndeprecated && !innerContext.verbose) {
                             innerContext.info[package_.name] = {
-                                _allDeprecated: true
+                                _allDeprecated: true,
                             };
                         }
                         else if(innerContext.info[package_.name].deprecations) {
@@ -62,14 +62,14 @@ export default async () => new Listr([
                         else {
                             delete innerContext.info[package_.name];
                         }
-                    }
-                }
+                    },
+                },
             ], {
-                showSubtasks: false
-            })
+                showSubtasks: false,
+            }),
         })), {
             concurrent: true,
-            clearOutput: true
-        })
-    }
+            clearOutput: true,
+        }),
+    },
 ]);

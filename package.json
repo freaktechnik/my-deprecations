@@ -6,7 +6,7 @@
   "main": "index.js",
   "exports": "./index.js",
   "scripts": {
-    "lint": "eslint . --ext js,json",
+    "lint": "eslint .",
     "test": "npm run lint",
     "start": "node cli.js"
   },
@@ -37,7 +37,7 @@
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
-    "@freaktechnik/eslint-config-node": "^9.2.1",
+    "@freaktechnik/eslint-config-node": "^10.0.3",
     "eslint": "^8.57.0"
   },
   "bin": {
