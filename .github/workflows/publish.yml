@@ -10,7 +10,7 @@ jobs:
       id-token: write
     environment:
       name: production
-      url: https://npmjs.com/package/transifex-loader
+      url: https://npmjs.com/package/my-deprecations
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
