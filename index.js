@@ -1,5 +1,5 @@
 import userPackages from "npm-user-packages";
-import Listr from "listr";
+import { Listr } from "listr2";
 import pacote from "pacote";
 
 const getVersions = async (moduleName) => {
@@ -20,13 +20,13 @@ export default async () => new Listr([
     },
     {
         title: 'Get versions of packages',
-        task: (context) => new Listr(context.packages.map((package_) => ({
+        task: (context, task) => task.newListr(context.packages.map((package_) => ({
             title: package_.name,
-            task: () => new Listr([
+            task: (taskContext, packageTask) => packageTask.newListr([
                 {
                     title: `Get versions for ${package_.name}`,
-                    task: async (packageContext) => {
-                        packageContext.info[package_.name] = {
+                    task: async () => {
+                        context.info[package_.name] = {
                             hasUndeprecated: false,
                             versions: await getVersions(package_.name),
                         };
@@ -34,38 +34,39 @@ export default async () => new Listr([
                 },
                 {
                     title: `Get deprecation messages for ${package_.name}`,
-                    task: (depContext) => {
-                        for(const version of depContext.info[package_.name].versions) {
+                    task: () => {
+                        for(const version of context.info[package_.name].versions) {
                             if(version.deprecated) {
-                                if(!depContext.info[package_.name].deprecations) {
-                                    depContext.info[package_.name].deprecations = {};
+                                if(!context.info[package_.name].deprecations) {
+                                    context.info[package_.name].deprecations = {};
                                 }
-                                depContext.info[package_.name].deprecations[version.version] = version.deprecated;
+                                context.info[package_.name].deprecations[version.version] = version.deprecated;
                             }
                             else {
-                                depContext.info[package_.name].hasUndeprecated = true;
+                                context.info[package_.name].hasUndeprecated = true;
                             }
                         }
                     },
                 },
                 {
                     title: `Collect deprecations for ${package_.name}`,
-                    task: (innerContext) => {
-                        if(!innerContext.info[package_.name].hasUndeprecated && !innerContext.verbose) {
-                            innerContext.info[package_.name] = {
+                    task: () => {
+                        if(!context.info[package_.name].hasUndeprecated && !context.verbose) {
+                            context.info[package_.name] = {
                                 _allDeprecated: true,
                             };
                         }
-                        else if(innerContext.info[package_.name].deprecations) {
-                            innerContext.info[package_.name] = innerContext.info[package_.name].deprecations;
+                        else if(context.info[package_.name].deprecations) {
+                            context.info[package_.name] = context.info[package_.name].deprecations;
                         }
                         else {
-                            delete innerContext.info[package_.name];
+                            delete context.info[package_.name];
                         }
                     },
                 },
             ], {
                 showSubtasks: false,
+                concurrent: false,
             }),
         })), {
             concurrent: true,
