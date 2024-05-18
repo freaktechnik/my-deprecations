@@ -28,8 +28,8 @@ export default async () => new Listr([
                     task: async (packageContext) => {
                         packageContext.info[package_.name] = {
                             hasUndeprecated: false,
+                            versions: await getVersions(package_.name),
                         };
-                        packageContext.info[package_.name].versions = await getVersions(package_.name);
                     },
                 },
                 {

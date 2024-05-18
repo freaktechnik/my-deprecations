@@ -68,7 +68,7 @@ const ARG_COUNT = 1,
             title: "Get username",
             enabled: (context) => !context.username,
             task: async (context) => {
-                const { stdout } = await execa('npm', [ 'whoami' ]);
+                const { stdout } = await execa`npm whoami`;
                 context.username = stdout;
             },
         },
