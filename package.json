@@ -49,5 +49,8 @@
     "index.js",
     "cli.js",
     "treeify.js"
-  ]
+  ],
+  "publishConfig": {
+    "provenance": true
+  }
 }
