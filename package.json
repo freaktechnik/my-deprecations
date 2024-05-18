@@ -1,6 +1,6 @@
 {
   "name": "my-deprecations",
-  "version": "2.1.5",
+  "version": "3.0.0",
   "description": "List your deprecations",
   "type": "module",
   "main": "index.js",
