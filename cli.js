@@ -8,7 +8,6 @@ import buildTree from "pretty-tree";
 import formatTree from "./treeify.js";
 import chalk from "chalk";
 const ARG_COUNT = 1,
-    FIRST = 0,
     cli = meow(`
     Usage
         $ my-deprecations [username]
@@ -90,8 +89,9 @@ if(cli.input.length > ARG_COUNT) {
     cli.showHelp(ERROR);
 }
 else {
+    const [ username ] = cli.input;
     tasks.run({
-        username: cli.input[FIRST],
+        username,
         verbose: cli.flags.verbose,
         info: {},
     })
