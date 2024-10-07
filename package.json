@@ -29,7 +29,7 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "execa": "^9.4.0",
-    "listr2": "^8.2.4",
+    "listr2": "^8.2.5",
     "meow": "^13.2.0",
     "npm-user-packages": "^3.0.0",
     "pacote": "^19.0.0",
