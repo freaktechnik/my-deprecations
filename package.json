@@ -32,7 +32,7 @@
     "listr2": "^9.0.3",
     "meow": "^13.2.0",
     "npm-user-packages": "^3.0.0",
-    "pacote": "^21.0.0",
+    "pacote": "^21.0.3",
     "pretty-tree": "^1.0.0"
   },
   "devDependencies": {
