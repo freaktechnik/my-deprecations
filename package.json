@@ -43,7 +43,7 @@
     "my-depreactions": "cli.js"
   },
   "engines": {
-    "node": ">= 16.13.0"
+    "node": ">= 20"
   },
   "files": [
     "index.js",
