@@ -28,7 +28,7 @@
   "homepage": "https://github.com/freaktechnik/my-deprecations#readme",
   "dependencies": {
     "chalk": "^5.6.2",
-    "execa": "^9.6.0",
+    "execa": "^9.6.1",
     "listr2": "^9.0.5",
     "meow": "^14.0.0",
     "npm-user-packages": "^3.0.0",
