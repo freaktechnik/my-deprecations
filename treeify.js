@@ -12,18 +12,24 @@ export default (deprecatedPakages, username) => {
         leaf: {},
     };
     let addedLeaf = false;
-    for(const package_ in deprecatedPakages) {
+    for(const [
+        packageName,
+        packageDetails,
+    ] of Object.entries(deprecatedPakages)) {
         const node = {
-            label: package_,
+            label: packageName,
             leaf: {},
         };
-        if(deprecatedPakages[package_]._allDeprecated) {
-            tree.leaf[package_] = '(all versions)';
+        if(packageDetails._allDeprecated) {
+            tree.leaf[packageName] = '(all versions)';
             addedLeaf = true;
         }
         else {
-            for(const version in deprecatedPakages[package_]) {
-                node.leaf[version] = deprecatedPakages[package_][version];
+            for(const [
+                version,
+                versionDetails,
+            ] of Object.entries(packageDetails)) {
+                node.leaf[version] = versionDetails;
             }
             tree.nodes.push(node);
         }
