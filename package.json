@@ -2,30 +2,39 @@
   "name": "my-deprecations",
   "version": "3.0.0",
   "description": "List your deprecations",
+  "license": "MIT",
+  "repository": "github:freaktechnik/my-deprecations",
+  "homepage": "https://github.com/freaktechnik/my-deprecations#readme",
+  "bugs": "https://github.com/freaktechnik/my-deprecations/issues",
+  "author": "Martin Giger (https://humanoids.be)",
   "type": "module",
-  "main": "index.js",
   "exports": "./index.js",
+  "main": "./index.js",
+  "bin": {
+    "my-depreactions": "./cli.js"
+  },
+  "sideEffects": false,
+  "engines": {
+    "node": ">= 20"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint",
     "start": "node cli.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/freaktechnik/my-deprecations.git"
-  },
+  "files": [
+    "index.js",
+    "treeify.js"
+  ],
   "keywords": [
     "npm",
     "deprecated",
     "package",
     "list"
   ],
-  "author": "Martin Giger (https://humanoids.be)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/freaktechnik/my-deprecations/issues"
-  },
-  "homepage": "https://github.com/freaktechnik/my-deprecations#readme",
   "dependencies": {
     "chalk": "^6.0.1",
     "execa": "^10.2.1",
@@ -38,19 +47,5 @@
   "devDependencies": {
     "@freaktechnik/eslint-config-node": "^14.1.0",
     "eslint": "^10.14.0"
-  },
-  "bin": {
-    "my-depreactions": "cli.js"
-  },
-  "engines": {
-    "node": ">= 20"
-  },
-  "files": [
-    "index.js",
-    "cli.js",
-    "treeify.js"
-  ],
-  "publishConfig": {
-    "provenance": true
   }
 }
